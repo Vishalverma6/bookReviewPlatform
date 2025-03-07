@@ -9,6 +9,7 @@ import Signup from './pages/Signup'
 import Login from './pages/Login'
 import Book from './components/core/Book'
 import BookDetails from './components/core/BookDetails'
+import UserProfile from './components/core/UserProfile'
 
 function App() {
 
@@ -21,6 +22,8 @@ function App() {
        <Route path='/login' element={<Login/>}/>
        <Route path='/books' element={<Book/>}/>
        <Route path="/book/:bookId" element={<BookDetails />} />
+       <Route path='/profile' element={<UserProfile/>}/>
+
 
       </Routes>
     </>

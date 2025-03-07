@@ -27,8 +27,8 @@ const Navbar = () => {
             {
             token &&
             (
-                <Link to="/dashboard/home" className="text-2xl font-bold hover:text-gray-200 transition">
-                    Dashboard
+                <Link to="/profile" className="text-2xl font-bold hover:text-gray-200 transition">
+                    Profile
                 </Link>
             )
             }

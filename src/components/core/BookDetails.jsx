@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { getBook } from "../../services/operations/bookAPI";
+import RatingAndReview from "./RatingAndReview";
+import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 
 
 const BookDetails = () => {
   const { bookId } = useParams(); // Get book ID from URL
   const [book, setBook] = useState(null);
+  const [reviewModal, setReviewModal] = useState(false);
+  const {token}= useSelector((state)=> state.auth)
 
   useEffect(() => {
     const fetchBook = async () => {
@@ -19,6 +24,16 @@ const BookDetails = () => {
     };
     fetchBook();
   }, [bookId]);
+
+  const clickHandler =async()=> {
+    if(!token){
+        toast.error("Please login first to Review ")
+    }
+    else{
+        setReviewModal(true);
+    }
+
+  }
 
   if (!book) return <p className="text-center text-gray-600">Loading book details...</p>;
 
@@ -38,6 +53,14 @@ const BookDetails = () => {
           <h2 className="text-lg text-gray-700 mt-2">by {book.author}</h2>
           <p className="text-gray-600 mt-4">{book.description}</p>
         </div>
+
+        <div>
+            <button 
+             onClick={()=> clickHandler()}
+            className="px-6 py-2 rounded-md cursor-pointer bg-yellow-300 text-black font-bold  transition-transform transform hover:scale-105">
+            Add Review
+            </button>
+        </div>
       </div>
 
       {/* Reviews Section */}
@@ -55,6 +78,15 @@ const BookDetails = () => {
           <p className="text-gray-500">No reviews yet.</p>
         )}
       </div>
+
+
+      {/* review Modal */}
+      {
+        reviewModal && (
+            <RatingAndReview book={book} setReviewModal={setReviewModal}/>
+        )
+
+      }
     </div>
   );
 };

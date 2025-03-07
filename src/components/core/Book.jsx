@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router';
 
 const Book = () => {
     const [bookData, setBookData] = useState([]);
-    const [bookDetails, setBookDetails] = useState();
     const navigate=  useNavigate();
 
     const getBookDetails = async()=> {

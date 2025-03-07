@@ -16,7 +16,9 @@ export const createReview = async(data,token)=> {
     const toastId = toast.loading("Loading...")
     let result = null ;
     try{
-        const response = await apiConnector("POST",CREATE_REVIEW_API,data);
+        const response = await apiConnector("POST",CREATE_REVIEW_API,data, {
+             Authorization:`Bearer ${token}`
+        });
         console.log("CREATE_REVIEW_API API RESPONSE....",response);
         if(!response.data.success){
             throw new Error (response?.data?.message || "Could not create review")
@@ -25,7 +27,8 @@ export const createReview = async(data,token)=> {
         toast.success(response?.data?.message || "Successfully create the Review")
     }catch(error){
         console.log("CREATE_REVIEW_API API ERROR .....",error);
-        toast.error(error.message);
+        // toast.error(error.message);
+        toast.error(error.response.data.message)
     }
     toast.dismiss(toastId)
     return result

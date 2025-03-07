@@ -64,10 +64,10 @@ export function login(email, password, navigate){
             toast.success("Login Successful")
             dispatch(setToken(response.data.token));
 
-            // dispatch(setUser(response?.data?.user));
+            
             localStorage.setItem("token",JSON.stringify(response?.data?.token));
-            // localStorage.setItem("user",JSON.stringify(response?.data?.user));
-            navigate("/dashboard/home");
+            
+            navigate("/profile");
         }
         catch(error){
             console.log("LOGIN API ERROR ......",error)
