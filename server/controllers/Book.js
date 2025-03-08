@@ -73,7 +73,13 @@ exports.getBook = async(req, res)=> {
         }
 
         const book = await Book.findById(bookId)
-                                        .populate("ratingAndReviews");
+                                        .populate({
+                                            path:"ratingAndReviews",
+                                            populate:{
+                                                path:"user",
+                                            },
+                                            
+                                        })
 
         
         if(!book){

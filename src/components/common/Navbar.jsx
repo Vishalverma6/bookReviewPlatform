@@ -18,9 +18,17 @@ const Navbar = () => {
     <nav className="bg-blue-400 text-white py-3 px-6 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
        
-        <div className='flex gap-x-4'>
+        <div className='flex gap-x-10'>
             <Link to="/" className="text-2xl font-bold hover:text-gray-200 transition">
             Home
+            </Link>
+
+            {/* Browse Books */}
+            <Link
+              to="/books"
+              className="text-2xl font-bold hover:text-gray-200 transition"
+            >
+              Browse Books
             </Link>
 
             {/* user Dashboard */}

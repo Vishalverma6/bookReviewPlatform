@@ -100,6 +100,7 @@ exports.getAllReviews = async(req, res) => {
     try{
         const allReviews = await RatingAndReviews.find({})
                                                .sort({rating:"desc"})
+                                               .populate("book")
                                                .populate({
                                                 path:"user",
                                                 select:"fullName email",
