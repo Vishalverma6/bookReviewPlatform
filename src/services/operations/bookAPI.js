@@ -7,6 +7,7 @@ const {
     ADD_BOOK_API,
     GET_ALL_BOOK_API,
     GET_BOOK_API,
+    SEARCH_BOOK_API,
 } = bookEndpoints;
 
 
@@ -75,4 +76,28 @@ export const getBook = async(bookId)=> {
     }
     toast.dismiss(toastId)
     return result
+}
+
+// search book
+export const getBookBySearch = async(search) => {
+    const toastId = toast.loading("Loading...")
+    let result =[];
+    try{
+        const response = await apiConnector("GET",`${SEARCH_BOOK_API}?search=${search}`);
+        console.log("SEARCH_BOOK_API API RESPONSE....",response);
+
+        if(!response.data.success){
+            throw new Error (response?.data?.message || "Could not fetched book")
+        }
+        result = response?.data?.data
+        toast.success(response?.data?.message || "Successfully fetched the book")
+
+    }catch(error){
+        console.log("SEARCH_BOOK_API API ERROR .....",error);
+        toast.error(error.message);
+
+    }
+    toast.dismiss(toastId)
+    return result
+
 }

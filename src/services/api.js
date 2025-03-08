@@ -16,7 +16,8 @@ export const userEndpoints ={
 export const bookEndpoints ={
     ADD_BOOK_API : BASE_URL + "/book/addBook",
     GET_ALL_BOOK_API: BASE_URL+ "/book/getAllBook",
-    GET_BOOK_API : BASE_URL + "/book/getBook"
+    GET_BOOK_API : BASE_URL + "/book/getBook",
+    SEARCH_BOOK_API: BASE_URL + "/book/searchBook",
 }
 
 // rating endpoints 

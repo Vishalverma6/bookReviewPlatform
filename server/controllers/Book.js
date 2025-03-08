@@ -105,3 +105,45 @@ exports.getBook = async(req, res)=> {
         })
     }
 }
+
+
+// search book 
+exports.getSearchBook = async (req, res) => {
+    try {
+        const { search, minRating, maxRating } = req.query;
+        let query = {};
+
+        // Search by title or author
+        if (search) {
+            query.$or = [
+                { title: { $regex: search, $options: "i" } }, // Case-insensitive search
+                { author: { $regex: search, $options: "i" } }
+            ];
+        }
+
+        // // Filter by rating range
+        // if (minRating || maxRating) {
+        //     query.rating = {};
+        //     if (minRating) query.rating.$gte = Number(minRating);
+        //     if (maxRating) query.rating.$lte = Number(maxRating);
+        // }
+
+        // Fetch books from DB
+        const books = await Book.find(query);
+
+        res.status(200).json({
+            success: true,
+            count: books.length,
+            data: books
+        });
+
+
+    } catch (error) {
+        console.error("Error fetching books:", error);
+        return res.status(500).json({
+            success:false,
+            message:"failed to search book",
+        })
+        
+    }
+};

@@ -1,6 +1,6 @@
 const express = require("express");
 const { auth, isAdmin } = require("../middlewares/auth");
-const { addBook, getAllBook, getBook } = require("../controllers/Book");
+const { addBook, getAllBook, getBook, getSearchBook } = require("../controllers/Book");
 
 const router = express.Router();
 
@@ -12,6 +12,9 @@ router.get("/getAllBook",getAllBook);
 
 // routes for getting book by id 
 router.get("/getBook/:bookId",getBook);
+
+// search book
+router.get("/searchBook",getSearchBook);
 
 
 
